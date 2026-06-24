@@ -4,28 +4,35 @@ import mongoose from "mongoose";
 import { DB_NAME } from "./constant.js";
 import express, { application } from "express"
 import connectDB from "./db/db.js";
-
+import{app} from "./app.js"
 
 dotenv.config({path: '.env'});
 
-connectDB();
 
-// const app = express();
+console.log("app.js loaded");
 
-// (async () => {
-//     try {
-//         await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`)
-//         app.on("express", (error) =>{
-//             console.log("ERROR : ",error)
-//             throw error
-//         })
+connectDB()
+.then(() => {
+    
+    
+    app.listen(process.env.PORT || 3000 , () => {
+        console.log(`Server is running on port  : ${process.env.PORT}`); 
+    })
+    
+    app.on("error", (error) => {
+        console.log("Error on App");
+        throw new error
+    })
 
-//         app.listen(process.env.PORT || 3000, () => {
-//             console.log(`Server is running on port ${process.env.PORT || 3000}`)
-//         })
-//     }
-//     catch(error){
-//         console.log("ERROR : ",error)
-//         throw error
-//     }
-// })()
+    app.get('/',(req,res) =>{
+        res.send({
+            "name" : "severrunning"
+        })
+    })
+
+})
+.catch((err) => {
+    console.log("Error in Connecting to Database: ", err)
+    process.exit(1);
+});
+
