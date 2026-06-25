@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import jwt  from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { User } from "./user.model";
 
 const donorSchema = new mongoose.Schema({
     firstName : {
@@ -72,6 +73,11 @@ const donorSchema = new mongoose.Schema({
         type: String,
         required : true
     },
+
+    createBy  :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : User
+    }
 
 },{timestamps: true})
 

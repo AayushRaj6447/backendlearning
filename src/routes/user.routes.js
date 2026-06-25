@@ -3,12 +3,10 @@ import { registerUser } from "../controllers/user.controller.js";
 import { loginUser } from "../controllers/user.controller.js";
 import {upload} from "../middlewares/multer.middleware.js"
 
-console.log("registerUser =", registerUser);
-console.log("loginUser =", loginUser);
 
-const router = Router();
+const userrouter = Router();
 
-router.route("/register")
+userrouter.route("/register")
     .post(upload.fields([
     {name : "avatar",
         maxCount : 1
@@ -17,8 +15,8 @@ router.route("/register")
     registerUser)
 
 
-router.route("/login").post(loginUser)
+userrouter.route("/login").post(loginUser)
 
 
 
-export {router}
+export {userrouter}

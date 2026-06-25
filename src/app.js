@@ -19,11 +19,13 @@ app.use(express.urlencoded({
 }));
 
 //routes
-import {router} from "./routes/user.routes.js"
+import {userrouter} from "./routes/user.routes.js"
+import {donorrouter} from "./routes/donor.route.js"
 
 //routes decleration
 
-app.use("/users",router)
+app.use("/users",userrouter)
+app.use("/donors",donorrouter)
 console.log("app.js loaded");
 
 app.use(express.static("public"));
